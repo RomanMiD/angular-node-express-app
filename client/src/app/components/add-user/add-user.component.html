@@ -1,0 +1,37 @@
+<div>
+  <div class="submit-form">
+    <div *ngIf="!submitted">
+      <div class="form-group">
+        <label for="firstname">firstname</label>
+        <input type="text" class="form-control" id="firstname" required [(ngModel)]="user.firstname" name="firstname" />
+      </div>
+
+      <div class="form-group">
+        <label for="lastname">lastname</label>
+        <input class="form-control" id="lastname" required [(ngModel)]="user.lastname" name="lastname" />
+      </div>
+      <div class="form-group">
+        <label for="number">phone number</label>
+        <input class="form-control" id="number" required [(ngModel)]="user.number" name="number" />
+      </div>
+      <div class="form-group">
+        <label for="address">address</label>
+        <input class="form-control" id="address" required [(ngModel)]="user.address" name="address" />
+      </div>
+      <div class="form-group">
+        <label for="sex">sex</label>
+        <select class="form-control" id="sex" required [(ngModel)]="user.sex" name="sex">
+          <option *ngFor="let sex of userSex | keyvalue" [value]="sex.value">{{sex.value}}</option>
+        </select>
+      </div>
+      <div class="mx-auto">
+        <button (click)="saveUser()" class="btn btn-success">Submit</button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="submitted" class="mx-auto">
+    <h4>User was submitted successfully!</h4>
+    <button class="btn btn-success" (click)="newUser()">Add</button>
+  </div>
+</div>

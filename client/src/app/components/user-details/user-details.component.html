@@ -1,0 +1,69 @@
+<div *ngIf="viewMode; else editable">
+  <div class="form-group" *ngIf="currentUser.id">
+    <div class="form-control">
+      {{ currentUser.firstname }}
+    </div>
+    <div class="form-control">
+      {{ currentUser.lastname }}
+    </div>
+    <div class="form-control">
+      {{ currentUser.sex }}
+    </div>
+    <div class="form-control">
+      {{ currentUser.address }}
+    </div>
+    <div class="form-control">
+      {{ currentUser.number }}
+    </div>
+    <div class="d-grid gap-2 mx-auto">
+      <button class="btn btn-primary" routerLink="/user/{{ currentUser.id }}">Edit</button>
+      <button class="btn btn-danger" (click)="deleteUser()">Delete</button>
+    </div>
+  </div>
+
+  <div *ngIf="!currentUser">
+    <br />
+    <p>Please click on a User...</p>
+  </div>
+</div>
+
+<ng-template #editable>
+  <div *ngIf="currentUser.id" class="edit-form">
+    <form>
+      <div class="form-group">
+        <label for="title">firstname</label>
+        <input type="text" class="form-control" id="firstname" [(ngModel)]="currentUser.firstname" name="firstname" />
+      </div>
+      <div class="form-group">
+        <label for="lastname">lastname</label>
+        <input type="text" class="form-control" id="lastname" [(ngModel)]="currentUser.lastname" name="lastname" />
+      </div>
+      <div class="form-group">
+        <select class="form-control" id="sex" required [(ngModel)]="currentUser.sex" name="sex">
+          <option *ngFor="let sex of userSex | keyvalue" [value]="sex.value">{{sex.value}}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="address">address</label>
+        <input type="text" class="form-control" id="address" [(ngModel)]="currentUser.address" name="address" />
+      </div>
+      <div class="form-group">
+        <label for="number">phone number</label>
+        <input type="text" class="form-control" id="number" [(ngModel)]="currentUser.number" name="address" />
+      </div>
+      <div class="d-grid gap-2 mx-auto">
+        <button class="btn btn-danger" (click)="deleteUser()">
+          Delete
+        </button>
+        <button type="submit" class="btn btn-primary" (click)="updateUser()">
+          Update
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <div *ngIf="!currentUser.id">
+    <br />
+    <p>Cannot access this user...</p>
+  </div>
+</ng-template>
