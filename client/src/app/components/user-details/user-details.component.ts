@@ -1,21 +1,21 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { UserService } from 'src/app/services/user.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { UserModel } from 'src/app/models/user.model';
-import { UserSex } from 'src/app/enums/sex.enum';
+import { Component, Input, OnInit } from '@angular/core'
+import { UserService } from 'src/app/services/user.service'
+import { ActivatedRoute, Router } from '@angular/router'
+import { UserModel } from 'src/app/models/user.model'
+import { UserSex } from 'src/app/enums/sex.enum'
 @Component({
   selector: 'app-user-details',
   templateUrl: './user-details.component.html',
   styles: [
     `.edit-form {
-      max-width: 400px;
-      margin: auto;
+      max-width: 400px
+      margin: auto
     }`
   ]
 })
 export class UserDetailsComponent implements OnInit {
 
-  @Input() viewMode = false;
+  @Input() viewMode = false
 
   @Input() currentUser: UserModel = {
     id: null,
@@ -34,7 +34,7 @@ export class UserDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     if (!this.viewMode) {
-      this.getUser(this.route.snapshot.params["id"]);
+      this.getUser(this.route.snapshot.params["id"])
     }
   }
 
@@ -42,11 +42,11 @@ export class UserDetailsComponent implements OnInit {
     this.userService.get(id)
       .subscribe({
         next: (data) => {
-          this.currentUser = data;
-          console.log(data);
+          this.currentUser = data
+          console.log(data)
         },
         error: (e) => console.error(e)
-      });
+      })
   }
 
   updateUser(): void {
@@ -57,27 +57,26 @@ export class UserDetailsComponent implements OnInit {
       address: this.currentUser.address,
       number: this.currentUser.number,
       sex: this.currentUser.sex,
-    };
+    }
 
     this.userService.update(this.currentUser.id, data)
       .subscribe({
         next: (res) => {
-          console.log(res);
+          console.log(res)
         },
         error: (e) => console.error(e)
-      });
+      })
   }
 
   deleteUser(): void {
     this.userService.delete(this.currentUser.id)
       .subscribe({
         next: (res) => {
-          console.log(res);
-          this.router.navigate(['/users']);
+          console.log(res)
+          this.router.navigate(['/users'])
         },
         error: (e) => console.error(e)
-      });
-      console.log("user id: " +this.currentUser.id)
+      })
   }
 
 }

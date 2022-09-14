@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { UserModel } from 'src/app/models/user.model';
-import { UserService } from 'src/app/services/user.service';
+import { Component, OnInit } from '@angular/core'
+import { UserModel } from 'src/app/models/user.model'
+import { UserService } from 'src/app/services/user.service'
 
 @Component({
   selector: 'app-users-list',
@@ -9,47 +9,47 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class UsersListComponent implements OnInit {
 
-  users?: UserModel[];
+  users?: UserModel[]
   currentUser: UserModel = {
     address: '',
     firstname: '',
     lastname: '',
     number: '',
     sex: '',
-  };
-  currentIndex = -1;
-  title = '';
+  }
+  currentIndex = -1
+  title = ''
 
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
-    this.retrieveUsers();
+    this.retrieveUsers()
   }
 
   retrieveUsers(): void {
     this.userService.getAll()
       .subscribe({
         next: (data) => {
-          this.users = data;
+          this.users = data
         },
         error: (e) => console.error(e)
-      });
+      })
   }
 
   refreshList(): void {
-    this.retrieveUsers();
+    this.retrieveUsers()
     this.currentUser = {
       address: '',
       firstname: '',
       lastname: '',
       number: '',
       sex: '',
-    };
-    this.currentIndex = -1;
+    }
+    this.currentIndex = -1
   }
 
   setActiveUser(user: UserModel, index: number): void {
-    this.currentUser = user;
-    this.currentIndex = index;
+    this.currentUser = user
+    this.currentIndex = index
   }
 }
