@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core'
+import { Component, Input, OnInit, Output } from '@angular/core'
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router'
 import { UserSex } from 'src/app/enums/sex.enum'
@@ -12,10 +12,10 @@ import { UserService } from 'src/app/services/user.service'
 })
 export class UserFormComponent implements OnInit {
   public userForm!: FormGroup
+
   @Input()
   public user!: UserModel
   userSex = UserSex
-
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,

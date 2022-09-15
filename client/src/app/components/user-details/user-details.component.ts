@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core'
+import { Component, Input, OnInit, Output } from '@angular/core'
 import { UserService } from 'src/app/services/user.service'
 import { ActivatedRoute, Router } from '@angular/router'
 import { UserModel } from 'src/app/models/user.model'
@@ -8,9 +8,8 @@ import { UserSex } from 'src/app/enums/sex.enum'
   templateUrl: './user-details.component.html'
 })
 export class UserDetailsComponent implements OnInit {
-
-
-currentUser: UserModel = {
+  @Input()  user!: UserModel;
+  @Output()currentUser: UserModel = {
     id: null,
     firstname: "",
     lastname: "",
@@ -18,6 +17,8 @@ currentUser: UserModel = {
     address:"",
     sex: ""
   }
+
+
   userSex = UserSex
   data = {}
   constructor(
@@ -27,6 +28,7 @@ currentUser: UserModel = {
 
   ngOnInit(): void {
       this.getUser(this.route.snapshot.params["id"])
+      this.currentUser = this.user
   }
 
   getUser(id: string): void {
