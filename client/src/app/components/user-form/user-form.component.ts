@@ -15,6 +15,8 @@ export class UserFormComponent implements OnInit {
 
   @Input()
   public user!: UserModel
+  @Output()
+  public currentUser!: UserModel
   userSex = UserSex
   constructor( private formBuilder: FormBuilder) { }
 
@@ -34,6 +36,8 @@ export class UserFormComponent implements OnInit {
   ngOnInit(): void {
     this.initForm()
   }
+
+
   onSubmit(): void {
     console.log(JSON.stringify(this.user))
     console.log(JSON.stringify(this.userForm.value))

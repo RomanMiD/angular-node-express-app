@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, Output } from '@angular/core'
 import { UserModel } from 'src/app/models/user.model'
 import { UserService } from 'src/app/services/user.service'
 
@@ -8,18 +8,15 @@ import { UserService } from 'src/app/services/user.service'
   styleUrls: ['./users-list.component.css']
 })
 export class UsersListComponent implements OnInit {
-
-  users?: UserModel[]
-  currentUser: UserModel = {
+  @Output() currentUser: UserModel = {
     address: '',
     firstname: '',
     lastname: '',
     number: '',
     sex: '',
   }
+  users?: UserModel[]
   currentIndex = -1
-  title = ''
-
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
