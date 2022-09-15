@@ -16,19 +16,15 @@ export class UserFormComponent implements OnInit {
   @Input()
   public user!: UserModel
   userSex = UserSex
-  constructor(
-    private formBuilder: FormBuilder,
-    private userService: UserService,
-    private route: ActivatedRoute,
-    private router: Router) { }
+  constructor( private formBuilder: FormBuilder) { }
 
   initForm(): void {
     this.userForm= this.formBuilder.group({
-      firstname : new FormControl("", [Validators.required]),
-      lastname  : new FormControl("", [Validators.required]),
-      number    : new FormControl("", [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{11}$"), Validators.maxLength(11)]),
-      address   : new FormControl("", [Validators.required]),
-      sex       : new FormControl("", [Validators.required])
+      firstname : new FormControl(this.user.firstname || "", [Validators.required]),
+      lastname  : new FormControl(this.user.lastname || "", [Validators.required]),
+      number    : new FormControl(this.user.number || "", [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{11}$"), Validators.maxLength(11)]),
+      address   : new FormControl(this.user.address || "", [Validators.required]),
+      sex       : new FormControl(this.user.sex || "", [Validators.required])
     })
   }
   get fc(){
@@ -36,53 +32,10 @@ export class UserFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getUser(this.route.snapshot.params["id"])
     this.initForm()
   }
-  onSubmit(){
-    this.userService.create(this.userForm.value)
+  onSubmit(): void {
+    console.log(JSON.stringify(this.user))
+    console.log(JSON.stringify(this.userForm.value))
   }
-
-
-  getUser(id: string): void {
-    this.userService.get(id)
-      .subscribe({
-        next: (data) => {
-          this.user = data
-          console.log(data)
-        },
-        error: (e) => console.error(e)
-      })
-  }
-
-  updateUser(): void {
-    const data : UserModel = {
-      id: this.user.id,
-      firstname: this.user.firstname,
-      lastname: this.user.lastname,
-      address: this.user.address,
-      number: this.user.number,
-      sex: this.user.sex,
-    }
-
-    this.userService.update(this.user.id, data)
-      .subscribe({
-        next: (res) => {
-          console.log(res)
-        },
-        error: (e) => console.error(e)
-      })
-  }
-
-  deleteUser(): void {
-    this.userService.delete(this.user.id)
-      .subscribe({
-        next: (res) => {
-          console.log(res)
-          this.router.navigate(['/users'])
-        },
-        error: (e) => console.error(e)
-      })
-  }
-
 }
