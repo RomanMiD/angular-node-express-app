@@ -25,6 +25,9 @@ export class UsersListComponent implements OnInit {
   ngOnInit(): void {
     this.retrieveUsers()
   }
+  get userSelected(){
+    return this.currentIndex > 0
+  }
 
   retrieveUsers(): void {
     this.userService.getAll()

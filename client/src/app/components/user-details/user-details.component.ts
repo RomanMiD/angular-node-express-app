@@ -9,9 +9,8 @@ import { UserSex } from 'src/app/enums/sex.enum'
 })
 export class UserDetailsComponent implements OnInit {
 
-  @Input() viewMode = false
 
-  @Input() currentUser: UserModel = {
+currentUser: UserModel = {
     id: null,
     firstname: "",
     lastname: "",
@@ -27,9 +26,7 @@ export class UserDetailsComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
-    if (!this.viewMode) {
       this.getUser(this.route.snapshot.params["id"])
-    }
   }
 
   getUser(id: string): void {

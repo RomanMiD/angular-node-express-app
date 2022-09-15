@@ -14,7 +14,7 @@
     </ul>
 
   </div>
-  <div class="col-md-6">
+  <div class="col-md-6" *ngIf="userSelected">
     <app-user-form>
       [user]="currentUser"
     ></app-user-form>
