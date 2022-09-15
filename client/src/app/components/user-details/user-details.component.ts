@@ -5,13 +5,7 @@ import { UserModel } from 'src/app/models/user.model'
 import { UserSex } from 'src/app/enums/sex.enum'
 @Component({
   selector: 'app-user-details',
-  templateUrl: './user-details.component.html',
-  styles: [
-    `.edit-form {
-      max-width: 400px
-      margin: auto
-    }`
-  ]
+  templateUrl: './user-details.component.html'
 })
 export class UserDetailsComponent implements OnInit {
 
