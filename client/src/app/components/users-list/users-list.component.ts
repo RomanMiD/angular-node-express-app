@@ -26,7 +26,7 @@ export class UsersListComponent implements OnInit {
     this.retrieveUsers()
   }
   get userSelected(){
-    return this.currentIndex > 0
+    return this.currentIndex >= 0
   }
 
   retrieveUsers(): void {
