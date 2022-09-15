@@ -1,8 +1,10 @@
+<ng-container *ngIf="!!currentUser.id">
+  {{currentUser }}
 <app-user-form [user]="currentUser">
 </app-user-form>
 <button class="btn btn-danger" (click)="deleteUser()">Delete</button>
 <button type="submit" class="btn btn-primary" (click)="updateUser()">Update</button>
-
+</ng-container>
 <div *ngIf="!currentUser.id">
   <br />
   <p>Cannot access this user...</p>

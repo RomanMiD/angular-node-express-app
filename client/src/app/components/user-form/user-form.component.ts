@@ -38,13 +38,6 @@ export class UserFormComponent implements OnInit {
   ngOnInit(): void {
     this.getUser(this.route.snapshot.params["id"])
     this.initForm()
-    this.userForm.patchValue({
-      firstname: this.user.firstname, 
-      lastname: this.user.lastname, 
-      number: this.user.number, 
-      address: this.user.address, 
-      sex: this.user.sex, 
-    });
   }
   onSubmit(){
     this.userService.create(this.userForm.value)
